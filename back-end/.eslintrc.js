@@ -23,5 +23,6 @@ module.exports = {
   },
   rules: {
     'import/no-extraneous-dependencies': 'off',
+    'import/no-import-module-exports': 'off',
   },
 };
