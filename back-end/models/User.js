@@ -22,6 +22,9 @@ const User = mongoose.model(
         type: String,
         required: true,
       },
+      img: {
+        type: String,
+      },
     },
     { timestamps: true },
   ),

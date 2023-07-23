@@ -3,8 +3,15 @@ import User from '../models/User';
 
 import createUserToken from '../middleware/create-token';
 
+import getToken from '../middleware/get-Token';
+
 module.exports = class UserController {
   static async Register(req, res) {
+    let img = '';
+
+    if (req.file) {
+      img = req.file.filename;
+    }
     const {
       name, phone, email, password, confirmpassword,
     } = req.body;
@@ -75,5 +82,68 @@ module.exports = class UserController {
     if (!checkPassword) return res.status(422).json({ message: 'Password invalid' });
 
     await createUserToken(user, req, res);
+  }
+
+  static async editUser(req, res) {
+    const { id } = req.params;
+    const user = await User.findOne({ _id: id }).select('-password');
+
+    if (!user) return res.status(401).json({ message: 'User not exists' });
+
+    let img = '';
+
+    if (req.file) {
+      img = req.file.filename;
+    }
+
+    const {
+      name, phone, email, password, confirmpassword,
+    } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ message: 'The name is required' });
+    }
+
+    if (!phone) {
+      return res.status(400).json({ message: 'The phone is required' });
+    }
+
+    if (!email) {
+      return res.status(400).json({ message: 'The email is required' });
+    }
+
+    if (!password) {
+      return res.status(400).json({ message: 'The password is required' });
+    }
+
+    if (password !== confirmpassword) {
+      return res.status(400).json({ message: 'The password is different a confirm password' });
+    } if (password === confirmpassword && password != null) {
+      const salt = 12;
+      const passwordHash = await bcrypt.hash(password, salt);
+      user.password = passwordHash;
+    }
+
+    const userExists = await User.findOne({ email });
+
+    if (user.email !== email && userExists) {
+      return res.status(422).json({ message: 'This email has already exist' });
+    }
+
+    user.name = name;
+    user.phone = phone;
+    user.email = email;
+
+    try {
+      await User.findOneAndUpdate(
+        { _id: user._id },
+        { $set: user },
+        { new: true },
+      );
+
+      res.status(200).json({ message: 'User successfully edit' });
+    } catch (error) {
+      res.status(500).json({ message: error });
+    }
   }
 };
