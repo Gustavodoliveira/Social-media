@@ -1,6 +1,4 @@
-import Jwt from 'jsonwebtoken';
-
-const getToken = (req, res) => {
+const getToken = (req) => {
   const authHeader = req.headers.authorization;
   const token = authHeader.split(' ')[1];
 

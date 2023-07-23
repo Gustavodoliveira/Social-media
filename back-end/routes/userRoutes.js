@@ -8,5 +8,6 @@ const router = Router();
 router.post('/register', UserController.Register);
 router.post('/login', UserController.Login);
 router.patch('/edit/:id', checkToken, UserController.editUser);
+router.delete('/delete/:id', checkToken, UserController.deleteUser);
 
 module.exports = router;
