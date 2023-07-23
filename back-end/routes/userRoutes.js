@@ -3,6 +3,7 @@ import UserController from '../controllers/userController';
 
 const router = Router();
 
-router.get('/', UserController.Register);
+router.post('/register', UserController.Register);
+router.post('/login', UserController.Login);
 
 module.exports = router;

@@ -11,7 +11,7 @@ app.use(Express.json());
 
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
-app.use('/', UserRoutes);
+app.use('/user', UserRoutes);
 
 app.listen(port, () => {
   console.log('Server is running');
