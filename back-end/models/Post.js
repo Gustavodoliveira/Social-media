@@ -14,13 +14,10 @@ const Posts = mongoose.model(
         type: String,
         required: true,
       },
-      User: {
-        name: {
-          type: String,
-        },
-        email: {
-          type: String,
-        },
+      user: {
+        _id: String,
+        name: String,
+        email: String,
       },
     },
     { timestamps: true },
