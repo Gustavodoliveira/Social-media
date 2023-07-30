@@ -5,6 +5,12 @@ import Posts from '../models/Post';
 import User from '../models/User';
 
 module.exports = class postController {
+  static async ShowPost(req, res) {
+    const Post = await Posts.find().sort('-createdAt');
+
+    res.status(200).json({ Post });
+  }
+
   static async Postar(req, res) {
     const token = getToken(req);
     const decoded = jwt.verify(token, process.env.SECRET);
@@ -38,6 +44,8 @@ module.exports = class postController {
 
     const post = await Posts.findById(id);
 
+    if (!post) return res.status(400).json({ message: 'Post not exists' });
+
     if (decoded.id !== post.user._id) return res.status(401).json({ message: 'Not authorization' });
     const { Title, Content } = req.body;
 
@@ -57,6 +65,25 @@ module.exports = class postController {
       res.status(200).json({ message: 'Edit success' });
     } catch (error) {
       res.status(500).json({ message: 'Error in server' });
+    }
+  }
+
+  static async DeletePost(req, res) {
+    const { id } = req.params;
+    const token = getToken(req);
+    const decoded = jwt.verify(token, process.env.SECRET);
+
+    const post = await Posts.findById(id);
+
+    if (!post) return res.status(400).json({ message: 'Post not exists' });
+
+    if (decoded.id !== post.user._id) return res.status(401).json({ message: 'Not authorization' });
+
+    try {
+      await Posts.deleteOne({ _id: post._id });
+      res.status(200).json({ message: 'Post success delete' });
+    } catch (error) {
+      res.status(500).json({ message: 'Server in error' });
     }
   }
 };

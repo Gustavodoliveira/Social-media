@@ -6,6 +6,11 @@ import createUserToken from '../middleware/create-token';
 import getToken from '../middleware/get-Token';
 
 module.exports = class UserController {
+  static async ShowUser(req, res) {
+    const users = await User.find().select('-password  -createdAt');
+    res.status(200).json({ user: users });
+  }
+
   static async Register(req, res) {
     let img = '';
 
