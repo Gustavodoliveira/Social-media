@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import Jwt from 'jsonwebtoken';
 import User from '../models/User';
 
 import createUserToken from '../middleware/create-token';
@@ -9,6 +10,18 @@ module.exports = class UserController {
   static async ShowUser(req, res) {
     const users = await User.find().select('-password  -createdAt');
     res.status(200).json({ user: users });
+  }
+
+  static async Profile(req, res) {
+    const token = getToken(req);
+    const decoded = Jwt.verify(token, process.env.SECRET);
+
+    try {
+      const user = await User.findById(decoded.id).select('-password -createdAt -updateAt -_id');
+      res.status(200).json({ message: user });
+    } catch (error) {
+      res.status(500).json({ message: 'Error in server' });
+    }
   }
 
   static async Register(req, res) {

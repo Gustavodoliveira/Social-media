@@ -11,6 +11,18 @@ module.exports = class postController {
     res.status(200).json({ Post });
   }
 
+  static async myPost(req, res) {
+    const token = getToken(req);
+    const decoded = jwt.verify(token, process.env.SECRET);
+    try {
+      const post = await Posts.findById(decoded.id).select('-createdAt -updateAt -_id');
+
+      res.status(200).json({ message: post });
+    } catch (error) {
+      res.status(500).json({ message: 'Error in server' });
+    }
+  }
+
   static async Postar(req, res) {
     const token = getToken(req);
     const decoded = jwt.verify(token, process.env.SECRET);
