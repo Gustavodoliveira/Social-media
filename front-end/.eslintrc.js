@@ -17,10 +17,12 @@ module.exports = {
       },
     },
   ],
+  // parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
   rules: {
-  },
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-curly-brace-presence': [<enabled>,<string>],
 };

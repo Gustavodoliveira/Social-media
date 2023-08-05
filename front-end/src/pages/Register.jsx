@@ -1,7 +1,14 @@
 import React from 'react';
 
-export function Register() {
+import Header from '../components/header/header';
+
+function Register() {
   return (
-    <div>Register</div>
+    <>
+      <Header />
+      <h1>Register</h1>
+    </>
   );
 }
+
+export default Register;
