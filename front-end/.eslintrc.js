@@ -23,7 +23,10 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    // eslint-disable-next-line quote-props
+    'import/no-extraneous-dependencies': 'off'
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/prefer-default-export': 0,
+    'react/jsx-props-no-spreading': 'off',
   },
 };

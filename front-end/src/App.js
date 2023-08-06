@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
-import Register from './pages/Register';
+import Register from './pages/Register/Register';
 
 function App() {
   return (
