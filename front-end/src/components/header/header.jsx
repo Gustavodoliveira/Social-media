@@ -1,20 +1,23 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaAppStore } from 'react-icons/fa';
+
+import { Headers } from './styleheader';
 
 function Header() {
   return (
-    <header>
-      <FaAppStore />
-      <h1>Social Media</h1>
-      <nav>
-        <ul>
-          <Link to="/">Login</Link>
-          <Link to="/">About</Link>
-        </ul>
-      </nav>
-    </header>
+    <Headers>
+      <header>
+        <div>
+          <h1>Social Media</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><Link to="/">Login</Link></li>
+            <li><Link to="/">About</Link></li>
+          </ul>
+        </nav>
+      </header>
+    </Headers>
   );
 }
 
