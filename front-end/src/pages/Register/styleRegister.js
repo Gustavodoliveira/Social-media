@@ -28,6 +28,11 @@ export const Container = styled.div`
     padding: 1rem;
     cursor: pointer;
     background-color: ${StyleGlobal.btn};
-    color: #fff;
+    color: #000;
+
+    &:hover{
+      background-color: ${StyleGlobal.btnbghover};
+      color: ${StyleGlobal.colorTextHover};
+    }
   }
 `;

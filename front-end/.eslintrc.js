@@ -28,5 +28,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'import/prefer-default-export': 0,
     'react/jsx-props-no-spreading': 'off',
+    // eslint-disable-next-line quote-props
+    'react/jsx-no-bind': 'off',
   },
 };

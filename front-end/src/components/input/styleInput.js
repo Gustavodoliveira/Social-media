@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+// import * as StyleGlobal from '../../globalStyle';
 
 export const InputContainer = styled.div`
   
@@ -14,7 +15,8 @@ export const InputContainer = styled.div`
     border-radius: .5rem;
     text-transform: uppercase;
     margin-bottom: 2rem;
-  }
+    
+}
 
   
   
