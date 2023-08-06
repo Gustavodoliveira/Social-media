@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import { InputContainer } from './styleInput';
+
 function Input({
   type, name, placeHolder, handleOnChange, value, multiple,
 }) {
   return (
-    <div>
-      <label htmlFor={name}>{name}</label>
+    <InputContainer>
+      <label htmlFor={name}>
+        {name}
+        :
+      </label>
       <input
         type={type}
         name={name}
@@ -16,8 +21,7 @@ function Input({
         value={value}
         {...(multiple ? { multiple } : '')}
       />
-    </div>
-
+    </InputContainer>
   );
 }
 
