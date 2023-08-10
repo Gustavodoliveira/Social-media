@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { Container } from './styleRegister';
 
@@ -6,7 +7,15 @@ import Header from '../../components/header/header';
 import Input from '../../components/input/input';
 
 function Register() {
+  const Dispatch = useDispatch();
   const { user, setUser } = useState({});
+
+  function handleClick(e) {
+    e.preventDefault(e);
+    Dispatch({
+      type: 'BOTAO_CLICADO',
+    });
+  }
 
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -52,7 +61,7 @@ function Register() {
             placeHolder="confirm your password"
             onChange={handleChange}
           />
-          <input type="submit" value="Register" />
+          <input type="submit" value="Register" onClick={handleClick} />
 
         </form>
       </Container>
