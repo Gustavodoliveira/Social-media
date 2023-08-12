@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+/* import { useDispatch } from 'react-redux'; */
 
 import { Container } from './styleRegister';
 
 import Header from '../../components/header/header';
 import Input from '../../components/input/input';
 
-function Register() {
-  const Dispatch = useDispatch();
-  const { user, setUser } = useState({});
+/* import * as action from '../../store/modules/auth/actions'; */
 
-  function handleClick(e) {
+function Register() {
+  /*  const Dispatch = useDispatch(); */
+  const [user, setUser] = useState({});
+
+  /*  function handleClick(e) {
     e.preventDefault(e);
-    Dispatch({
-      type: 'BOTAO_CLICADO',
-    });
-  }
+    Dispatch(action.UserRegisterRequest());
+    console.log(user);
+  } */
 
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
+
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(user);
   }
   return (
     <>
@@ -34,34 +37,34 @@ function Register() {
             type="text"
             name="nome"
             placeHolder="type your name"
-            onChange={handleChange}
+            handleOnChange={handleChange}
 
           />
           <Input
             type="text"
             name="phone"
             placeHolder="type your phone"
-            onChange={handleChange}
+            handleOnChange={handleChange}
           />
           <Input
             type="email"
             name="E-mail"
             placeHolder="type your e-mail"
-            onChange={handleChange}
+            handleOnChange={handleChange}
           />
           <Input
             type="password"
             name="password"
             placeHolder="type your password"
-            onChange={handleChange}
+            handleOnChange={handleChange}
           />
           <Input
             type="password"
             name="confirmpassword"
             placeHolder="confirm your password"
-            onChange={handleChange}
+            handleOnChange={handleChange}
           />
-          <input type="submit" value="Register" onClick={handleClick} />
+          <input type="submit" value="Register" />
 
         </form>
       </Container>

@@ -1,15 +1,7 @@
 import { legacy_createStore as createStore } from 'redux';
 
-const Reducer = (state, action) => {
-  switch (action.type) {
-    case 'BOTAO_CLICADO':
-      console.log('ouvindo teu botao');
-      return state;
+import rootReducer from './modules/rootReducer';
 
-    default:
-      return state;
-  }
-};
-const Store = createStore(Reducer);
+const Store = createStore(rootReducer);
 
 export default Store;
