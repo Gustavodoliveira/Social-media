@@ -1,20 +1,18 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
-import { Provider } from 'react-redux';
 
-import Store from './store';
+import { UserProvider } from './context/UserContext';
 import Register from './pages/Register/Register';
 
 function App() {
   return (
-    <Provider store={Store}>
+    <UserProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Register />} />
         </Routes>
       </Router>
-    </Provider>
+    </UserProvider>
   );
 }
-
 export default App;

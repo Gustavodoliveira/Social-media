@@ -1,7 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
 
-e;
-
 export const textColorPrimary = '#C4EEF2';
 export const colorTextHover = '#A67458';
 export const coloBgPrimary = '#025159';

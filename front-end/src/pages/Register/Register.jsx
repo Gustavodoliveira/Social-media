@@ -1,33 +1,21 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
-import axios from '../../services/api';
+import React, { useState, useContext } from 'react';
+import { ToastContainer } from 'react-toastify';
+/* import axios from '../../services/api'; */
 
 import { Container } from './styleRegister';
 
 import Header from '../../components/header/header';
 import Input from '../../components/input/input';
 
-import * as action from '../../store/modules/auth/actions';
+import { Context } from '../../context/UserContext';
 
 function Register() {
-  const Dispatch = useDispatch();
   const [user, setUser] = useState({});
+  const { registe } = useContext(Context);
 
   async function handleClick(e) {
     e.preventDefault(e);
-
-    try {
-      const responses = await axios.post('/user/register', (user));
-      toast.success(responses.data.message);
-      localStorage.setItem(responses.token);
-      Dispatch(action.UserRegisterRequest());
-    } catch (error) {
-      if (error) {
-        const resp = await error.response?.data?.message;
-        toast.error(resp);
-      }
-    }
+    registe(user);
   }
 
   function handleChange(e) {
