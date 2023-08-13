@@ -31,5 +31,6 @@ module.exports = {
     // eslint-disable-next-line quote-props
     'react/jsx-no-bind': 'off',
     'default-param-last': 0,
+    'no-unused-vars': 'off',
   },
 };

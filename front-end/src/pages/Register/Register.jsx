@@ -29,8 +29,9 @@ function Register() {
   return (
     <>
       <Header />
-      <ToastContainer autoClose={3000} />
+
       <Container>
+        <ToastContainer autoClose={3000} />
         <h1>Create your account</h1>
         <p>create your account and have fun with your friends</p>
         <form onSubmit={handleSubmit}>
