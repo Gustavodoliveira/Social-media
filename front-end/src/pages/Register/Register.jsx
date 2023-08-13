@@ -1,22 +1,34 @@
 import React, { useState } from 'react';
-/* import { useDispatch } from 'react-redux'; */
+import { useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import axios from '../../services/api';
 
 import { Container } from './styleRegister';
 
 import Header from '../../components/header/header';
 import Input from '../../components/input/input';
 
-/* import * as action from '../../store/modules/auth/actions'; */
+import * as action from '../../store/modules/auth/actions';
 
 function Register() {
-  /*  const Dispatch = useDispatch(); */
+  const Dispatch = useDispatch();
   const [user, setUser] = useState({});
 
-  /*  function handleClick(e) {
+  async function handleClick(e) {
     e.preventDefault(e);
-    Dispatch(action.UserRegisterRequest());
-    console.log(user);
-  } */
+
+    try {
+      const responses = await axios.post('/user/register', (user));
+      toast.success(responses.data.message);
+      localStorage.setItem(responses.token);
+      Dispatch(action.UserRegisterRequest());
+    } catch (error) {
+      if (error) {
+        const resp = await error.response?.data?.message;
+        toast.error(resp);
+      }
+    }
+  }
 
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -24,18 +36,19 @@ function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(user);
   }
+
   return (
     <>
       <Header />
+      <ToastContainer autoClose={3000} />
       <Container>
         <h1>Create your account</h1>
         <p>create your account and have fun with your friends</p>
         <form onSubmit={handleSubmit}>
           <Input
             type="text"
-            name="nome"
+            name="name"
             placeHolder="type your name"
             handleOnChange={handleChange}
 
@@ -48,7 +61,7 @@ function Register() {
           />
           <Input
             type="email"
-            name="E-mail"
+            name="email"
             placeHolder="type your e-mail"
             handleOnChange={handleChange}
           />
@@ -64,7 +77,7 @@ function Register() {
             placeHolder="confirm your password"
             handleOnChange={handleChange}
           />
-          <input type="submit" value="Register" />
+          <input type="submit" value="Register" onClick={handleClick} />
 
         </form>
       </Container>

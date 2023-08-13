@@ -4,7 +4,7 @@ import React from 'react';
 import { InputContainer } from './styleInput';
 
 function Input({
-  type, name, placeHolder, handleOnChange, value, multiple,
+  type, name, placeHolder, handleOnChange, multiple,
 }) {
   return (
     <InputContainer>
@@ -18,7 +18,6 @@ function Input({
         id={name}
         placeholder={placeHolder}
         onChange={handleOnChange}
-        value={value}
         {...(multiple ? { multiple } : '')}
       />
     </InputContainer>
