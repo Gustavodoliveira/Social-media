@@ -8,10 +8,10 @@ import useAuth from '../hooks/Auth';
 const Context = createContext();
 
 function UserProvider({ children }) {
-  const { registe } = useAuth();
+  const { authenticated, registe } = useAuth();
 
   return (
-    <Context.Provider value={{ registe }}>
+    <Context.Provider value={{ authenticated, registe }}>
       {children}
     </Context.Provider>
   );

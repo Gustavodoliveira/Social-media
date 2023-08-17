@@ -3,16 +3,20 @@ import React from 'react';
 
 import { UserProvider } from './context/UserContext';
 import Register from './pages/Register/Register';
+import Home from './pages/Home/Home';
 
 function App() {
   return (
-    <UserProvider>
-      <Router>
+
+    <Router>
+      <UserProvider>
         <Routes>
           <Route path="/" element={<Register />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
-      </Router>
-    </UserProvider>
+      </UserProvider>
+    </Router>
+
   );
 }
 export default App;
