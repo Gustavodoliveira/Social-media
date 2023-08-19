@@ -34,5 +34,29 @@ export default function useAuth() {
     }
   }
 
-  return { authenticated, registe };
+  async function login(user) {
+    try {
+      const response = await api.post('/user/login', (user));
+      const { message, token } = response.data;
+      toast.success(message);
+      localStorage.setItem('token', JSON.stringify(token));
+      setAuthenticated(true);
+      Navigate('/home');
+    } catch (error) {
+      const resp = await error.response?.data?.message;
+      toast.error(resp);
+    }
+  }
+
+  function logout() {
+    toast.success('Logout realized');
+    setAuthenticated(false);
+    localStorage.removeItem('token');
+    api.defaults.headers.Authorization = undefined;
+    Navigate('/');
+  }
+
+  return {
+    authenticated, registe, logout, login,
+  };
 }

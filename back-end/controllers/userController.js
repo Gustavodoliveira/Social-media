@@ -84,11 +84,11 @@ module.exports = class UserController {
     const { email, password } = req.body;
 
     if (!email) {
-      res.status(400).json({ message: 'The email is required' });
+      return res.status(400).json({ message: 'The email is required' });
     }
 
     if (!password) {
-      res.status(400).json({ message: 'The passowrd is required' });
+      return res.status(400).json({ message: 'The passowrd is required' });
     }
 
     const user = await User.findOne({ email });
@@ -100,6 +100,7 @@ module.exports = class UserController {
     if (!checkPassword) return res.status(422).json({ message: 'Password invalid' });
 
     await createUserToken(user, req, res);
+    return res.status(200);
   }
 
   static async editUser(req, res) {
@@ -159,9 +160,9 @@ module.exports = class UserController {
         { new: true },
       );
 
-      res.status(200).json({ message: 'User successfully edit' });
+      return res.status(200).json({ message: 'User successfully edit' });
     } catch (error) {
-      res.status(500).json({ message: error });
+      return res.status(500).json({ message: error });
     }
   }
 
@@ -175,7 +176,7 @@ module.exports = class UserController {
       await User.deleteOne({ _id: id });
       return res.status(200).json({ nessage: 'User  successfuly deleted' });
     } catch (error) {
-      res.status(500).json({ message: error });
+      return res.status(500).json({ message: error });
     }
   }
 };
