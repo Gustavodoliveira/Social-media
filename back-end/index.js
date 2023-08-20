@@ -10,7 +10,7 @@ const port = 5000;
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
+app.use(cors());
 
 app.use('/user', UserRoutes);
 app.use('/post', postRoutes);
