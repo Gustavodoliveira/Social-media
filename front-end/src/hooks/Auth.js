@@ -38,7 +38,7 @@ export default function useAuth() {
     try {
       const response = await api.post('/user/login', (user));
       const { message, token } = response.data;
-      toast.success(message);
+      toast.success('Login realized');
       localStorage.setItem('token', JSON.stringify(token));
       setAuthenticated(true);
       Navigate('/home');

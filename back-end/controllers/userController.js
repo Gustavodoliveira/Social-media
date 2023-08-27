@@ -15,12 +15,13 @@ module.exports = class UserController {
   static async Profile(req, res) {
     const token = getToken(req);
     const decoded = Jwt.verify(token, process.env.SECRET);
+    const { id } = decoded;
 
     try {
-      const user = await User.findById(decoded.id).select('-password -createdAt -updateAt -_id');
-      res.status(200).json({ message: user });
+      const user = await User.findById(id).select('-password -createdAt -updateAt -_id');
+      return res.status(200).json({ user });
     } catch (error) {
-      res.status(500).json({ message: 'Error in server' });
+      return res.status(500).json({ message: 'Error in server' });
     }
   }
 
