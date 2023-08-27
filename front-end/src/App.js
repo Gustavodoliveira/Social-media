@@ -8,6 +8,7 @@ import Login from './pages/Login/Login';
 import Footer from './components/footer/Footer';
 
 import { GlobalBodyStyled } from './globalStyle';
+import UserProfile from './pages/userProfile/userProfile';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Register />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/editProfile/:id" element={<UserProfile />} />
           </Routes>
           <Footer />
         </GlobalBodyStyled>

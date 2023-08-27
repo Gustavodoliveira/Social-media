@@ -7,7 +7,7 @@ export const HomeContainer = styled.div`
     .sidebar-myUser-container{
       background-color: ${globalStyle.colorBgSecondary};
       height: 100vh;
-      padding: .5rem;
+      padding: .5rem; 
     }
 
     .user-img{
