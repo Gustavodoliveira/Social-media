@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import bcrypt from 'bcrypt';
 import Jwt from 'jsonwebtoken';
 import User from '../models/User';
@@ -121,15 +122,15 @@ module.exports = class UserController {
     } = req.body;
 
     if (!name) {
-      return res.status(400).json({ message: 'The name is required' });
+      return res.status(422).json({ message: 'The name is required' });
     }
 
     if (!phone) {
-      return res.status(400).json({ message: 'The phone is required' });
+      return res.status(422).json({ message: 'The phone is required' });
     }
 
     if (!email) {
-      return res.status(400).json({ message: 'The email is required' });
+      return res.status(422).json({ message: 'The email is required' });
     }
 
     if (!password) {
@@ -137,7 +138,7 @@ module.exports = class UserController {
     }
 
     if (password !== confirmpassword) {
-      return res.status(400).json({ message: 'The password is different a confirm password' });
+      return res.status(422).json({ message: 'The password is different a confirm password' });
     } if (password === confirmpassword && password != null) {
       const salt = 12;
       const passwordHash = await bcrypt.hash(password, salt);
