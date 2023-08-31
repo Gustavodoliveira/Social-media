@@ -3,8 +3,6 @@ import { FaUserCircle } from 'react-icons/fa';
 import Header from '../../components/header/header';
 import api from '../../services/api';
 
-import Input from '../../components/input/input';
-
 import { HomeContainer } from './styleHome';
 
 function Home() {

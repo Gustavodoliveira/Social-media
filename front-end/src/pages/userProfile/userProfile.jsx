@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom';
 import api from '../../services/api';
 
 import Header from '../../components/header/header';
@@ -32,7 +33,10 @@ function UserProfile() {
         Authorization: `Bearer ${JSON.parse(token)}`,
       },
     })
-      .then((resp) => toast.success(resp.data.message))
+      .then((resp) => {
+        Navigate('/home');
+        toast.success(resp.response.data.message);
+      })
       .catch((err) => {
         toast.error(err.response.data.message);
       });
@@ -77,6 +81,7 @@ function UserProfile() {
             name="password"
             placeHolder="type your password"
             handleOnChange={handleChange}
+
           />
           <Input
             type="password"
