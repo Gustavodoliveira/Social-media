@@ -81,7 +81,6 @@ function UserProfile() {
             name="password"
             placeHolder="type your password"
             handleOnChange={handleChange}
-
           />
           <Input
             type="password"
