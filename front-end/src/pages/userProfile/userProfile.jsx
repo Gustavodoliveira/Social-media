@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 import Header from '../../components/header/header';
@@ -11,6 +11,7 @@ import { Container } from '../Register/styleRegister';
 function UserProfile() {
   const [user, setUser] = useState({});
   const token = localStorage.getItem('token');
+  const Navigate = useNavigate();
 
   useEffect(() => {
     api.get('/user/profile', {
@@ -34,8 +35,9 @@ function UserProfile() {
       },
     })
       .then((resp) => {
+        const { message } = resp.data;
         Navigate('/home');
-        toast.success(resp.response.data.message);
+        toast.success(message);
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -81,12 +83,14 @@ function UserProfile() {
             name="password"
             placeHolder="type your password"
             handleOnChange={handleChange}
+            value={user.password}
           />
           <Input
             type="password"
             name="confirmpassword"
             placeHolder="confirm your password"
             handleOnChange={handleChange}
+            value={user.confirmpassword}
           />
           <input type="submit" value="Register" onClick={handleClick} />
 

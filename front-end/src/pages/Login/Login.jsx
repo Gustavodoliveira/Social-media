@@ -37,12 +37,14 @@ function Login() {
             name="email"
             placeHolder="type your email"
             handleOnChange={handleChange}
+            value={user.email}
           />
           <Input
             type="password"
             name="password"
             placeHolder="type your password"
             handleOnChange={handleChange}
+            value={user.password}
           />
           <input type="submit" value="Login" onClick={handleClick} />
         </form>
