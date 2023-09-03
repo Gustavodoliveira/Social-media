@@ -64,17 +64,17 @@ function UserProfile() {
     <>
       <Header />
       <div>userProfile</div>
-      {(user.image || Preview) && (
+      {(user.img || Preview) && (
         <img
           src={
             Preview
               ? URL.createObjectURL(Preview)
-              : `${user.img}`
+              : `http://localhost:5000/public/users/${user.img}`
           }
           alt={user.name}
         />
-
       )}
+
       <Container>
         <ToastContainer autoClose={3000} />
         <h1>Edit your account</h1>
