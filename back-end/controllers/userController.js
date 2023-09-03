@@ -72,6 +72,7 @@ module.exports = class UserController {
         phone,
         email,
         password: passwordHash,
+        img,
       });
 
       const newUser = await user.save();
@@ -111,10 +112,10 @@ module.exports = class UserController {
 
     if (!user) return res.status(401).json({ message: 'User not exists' });
 
-    let img = '';
+    let image = 'abc';
 
     if (req.file) {
-      img = req.file.filename;
+      image = req.file.filename;
     }
 
     const {
@@ -154,6 +155,7 @@ module.exports = class UserController {
     user.name = name;
     user.phone = phone;
     user.email = email;
+    user.img = image;
 
     try {
       await User.findOneAndUpdate(

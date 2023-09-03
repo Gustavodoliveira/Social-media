@@ -10,6 +10,7 @@ import { Container } from '../Register/styleRegister';
 
 function UserProfile() {
   const [user, setUser] = useState({});
+  const [Preview, setPreview] = useState('');
   const token = localStorage.getItem('token');
   const Navigate = useNavigate();
 
@@ -27,9 +28,21 @@ function UserProfile() {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
 
+  function onFileChange(e) {
+    setPreview(e.target.files[0]);
+    setUser({ ...user, [e.target.name]: e.target.files[0] });
+  }
+
   async function handleClick(e) {
     e.preventDefault();
-    await api.patch(`/user/edit/${user._id}`, (user), {
+
+    const formData = new FormData();
+
+    const userFormData = await Object.keys(user).forEach((key) => formData.append(key, user[key]));
+
+    formData.append('user', userFormData);
+
+    await api.patch(`/user/edit/${user._id}`, (formData), {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
       },
@@ -51,11 +64,27 @@ function UserProfile() {
     <>
       <Header />
       <div>userProfile</div>
+      {(user.image || Preview) && (
+        <img
+          src={
+            Preview
+              ? URL.createObjectURL(Preview)
+              : `${user.img}`
+          }
+          alt={user.name}
+        />
+
+      )}
       <Container>
         <ToastContainer autoClose={3000} />
-        <h1>Create your account</h1>
-        <p>create your account and have fun with your friends</p>
+        <h1>Edit your account</h1>
         <form onSubmit={handleSubmit}>
+          <Input
+            text="imagem"
+            type="file"
+            name="image"
+            handleOnChange={onFileChange}
+          />
           <Input
             type="text"
             name="name"
