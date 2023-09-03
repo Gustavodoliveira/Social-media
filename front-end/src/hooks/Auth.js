@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -56,7 +57,24 @@ export default function useAuth() {
     Navigate('/');
   }
 
+  async function Userdelete(user) {
+    const token = localStorage.getItem('token');
+    await api.delete(`/user/delete/${user._id}`, (user), {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    })
+      .then((resp) => {
+        toast.success(resp.data.message);
+        setAuthenticated(false);
+        localStorage.removeItem('token');
+        Navigate('/');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return {
-    authenticated, registe, logout, login,
+    authenticated, registe, logout, login, Userdelete,
   };
 }

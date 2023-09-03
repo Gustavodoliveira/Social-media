@@ -9,12 +9,12 @@ const Context = createContext();
 
 function UserProvider({ children }) {
   const {
-    authenticated, registe, logout, login,
+    authenticated, registe, logout, login, Userdelete,
   } = useAuth();
 
   return (
     <Context.Provider value={{
-      authenticated, registe, logout, login,
+      authenticated, registe, logout, login, Userdelete,
     }}
     >
       {children}
