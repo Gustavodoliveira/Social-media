@@ -71,7 +71,7 @@ export default function useAuth() {
         Navigate('/');
       })
       .catch((err) => {
-        console.log(err);
+        toast.error('Error in server');
       });
   }
   return {

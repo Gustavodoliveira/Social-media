@@ -1,12 +1,10 @@
 import 'dotenv/config';
 import Jwt from 'jsonwebtoken';
 
-import getToken from './get-Token';
-
-import User from '../models/User';
-
 const checkToken = async (req, res, next) => {
-  const token = getToken(req);
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(401).json({ message: 'not exist authHeader' });
+  const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) return res.status(401).json({ message: 'acesss denied' });
 

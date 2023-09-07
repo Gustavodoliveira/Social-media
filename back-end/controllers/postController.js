@@ -27,7 +27,6 @@ module.exports = class postController {
     const token = getToken(req);
     const decoded = jwt.verify(token, process.env.SECRET);
     const Userid = decoded.id;
-    console.log(Userid);
     const { Title, Content } = req.body;
 
     if (!Title) return res.status(422).json({ message: 'The title is required' });

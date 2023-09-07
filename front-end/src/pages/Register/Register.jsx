@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { ToastContainer } from 'react-toastify';
-/* import axios from '../../services/api'; */
 
 import { Container } from './styleRegister';
 
@@ -11,7 +10,6 @@ import { Context } from '../../context/UserContext';
 
 function Register() {
   const [user, setUser] = useState({});
-  const [Preview, setPreview] = useState();
   const { registe } = useContext(Context);
 
   async function handleClick(e) {

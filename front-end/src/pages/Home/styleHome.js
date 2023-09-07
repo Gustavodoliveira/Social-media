@@ -34,15 +34,28 @@ export const HomeContainer = styled.div`
       margin-top: 2rem;
     }
     
-    input{
+    input[type='submit']{
       padding: .5rem;
       border-radius: .5rem;
+      border: none;
+      padding: 1rem;
+      color: ${globalStyle.textColorPrimary};
+      background-color: ${globalStyle.coloBgPrimary};
+      cursor: pointer;
+      transition: all .5s;
+
+      &:hover{
+        color: ${globalStyle.colorTextHover};
+        background-color: ${globalStyle.colorBgSecondary};
+      }
     }
     textarea{
+      padding: 1rem;
       width: 20rem;
       height: 5rem;
       resize: none;
-      border-radius: .5rem;
+      border-radius: .4rem;
+      font-size: 1rem;      
     }
 
     
