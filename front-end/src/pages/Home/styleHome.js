@@ -2,33 +2,10 @@ import { styled } from 'styled-components';
 import * as globalStyle from '../../globalStyle';
 
 export const HomeContainer = styled.div`
-    .home{
-      display: flex;
-    }
-    
-    .sidebar-myUser-container{
-      background-color: ${globalStyle.colorBgSecondary};
-      height: 100vh;
-      padding: .5rem; 
-    }
-
-    .user-img{
-      font-size: 3rem;
-    }
-
-    .sidebar-myUser-infos{
-      
-      text-align: center;
-      border-bottom: 1px solid #f4f4f4;
-      text-transform: uppercase;
-      padding: 1rem;
-      transition: all .5s;
-      &:hover {
-        background-color: ${globalStyle.colorBgHover};
-      }
-    }
-
     .Post {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin: 0 auto;
     }
 

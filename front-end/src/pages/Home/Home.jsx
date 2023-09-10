@@ -63,43 +63,33 @@ function Home() {
       <Header />
       <ToastContainer autoClose={3000} />
       <HomeContainer>
-        <section className="home">
-          <section className="sidebar-myUser-container">
-            <div className="sidebar-myUser-infos">
-              <h3>{user.name}</h3>
-            </div>
-            <div className="sidebar-myUser-infos">
-              <h3>{user.email}</h3>
-            </div>
-            <div className="sidebar-myUser-infos">
-              <h3>{user.phone}</h3>
-            </div>
-          </section>
-          <section className="Post">
-            <form className="form-container" onSubmit={handleSubmit}>
-              <h1>Share your story</h1>
-              <Input
-                type="text"
-                name="Title"
-                placeHolder="Your type title"
-                handleOnChange={handleChange}
-                value={post.Title || ''}
-              />
-              <div>
-                <textarea name="Content" placeholder="Type your Post" onChange={handleChange} />
-              </div>
-              <input type="submit" onClick={handleClick} value="Post" />
-            </form>
-          </section>
-        </section>
-        {
-          posts && posts.map((postss) => (
-            <PostsComponents
-              Title={postss.Title}
-              Content={postss.Content}
+        <section className="Post">
+          <form className="form-container" onSubmit={handleSubmit}>
+            <h1>Share your story</h1>
+            <Input
+              type="text"
+              name="Title"
+              placeHolder="Your type title"
+              handleOnChange={handleChange}
+              value={post.Title || ''}
             />
-          ))
-        }
+            <div>
+              <textarea name="Content" placeholder="Type your Post" onChange={handleChange} />
+            </div>
+            <input type="submit" onClick={handleClick} value="Post" />
+          </form>
+        </section>
+        <section className="Post--postad">
+          {
+            posts && posts.map((postss) => (
+              <PostsComponents
+                Title={postss.Title}
+                Content={postss.Content}
+                key={postss._id}
+              />
+            ))
+          }
+        </section>
       </HomeContainer>
     </>
   );

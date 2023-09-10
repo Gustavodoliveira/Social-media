@@ -7,6 +7,7 @@ export const colorBgSecondary = '#3E848C';
 export const colorBgHover = '#7ab8bf4f';
 export const btn = '#C4EEF2';
 export const btnbghover = '#025159';
+export const PostBgColorPrimary = '#f0ffff6b';
 
 export const GlobalBodyStyled = styled.div`
    body{
