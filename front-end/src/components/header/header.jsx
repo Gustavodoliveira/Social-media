@@ -12,17 +12,16 @@ function Header() {
   const { authenticated, logout } = useContext(Context);
   const [user, setUser] = useState({});
   const token = localStorage.getItem('token');
-  if (authenticated) {
-    useEffect(() => {
-      api.get('/user/profile', {
-        headers: {
-          Authorization: `Bearer ${JSON.parse(token)}`,
-        },
-      }).then((resp) => {
-        setUser(resp.data.user);
-      });
-    }, [token]);
-  }
+
+  useEffect(() => {
+    api.get('/user/profile', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    }).then((resp) => {
+      setUser(resp.data.user);
+    });
+  }, [token]);
 
   return (
     <Headers>

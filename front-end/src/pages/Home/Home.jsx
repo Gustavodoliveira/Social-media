@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { FaUserCircle } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from '../../components/header/header';
 import api from '../../services/api';
@@ -10,7 +9,22 @@ import Input from '../../components/input/input';
 function Home() {
   const [user, setUser] = useState({});
   const [post, setPost] = useState({});
+  const [posts, setPosts] = useState({});
   const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    api.get('/post', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    })
+      .then((resp) => {
+        setPosts(resp.data.Posts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
 
   useEffect(() => {
     api.get('/user/profile', {
@@ -40,7 +54,7 @@ function Home() {
         toast.success(resp.data.message);
       })
       .catch((err) => {
-        toast.error(err.data.message);
+        toast.error(err.response.data.message);
       });
   }
   return (
@@ -49,9 +63,6 @@ function Home() {
       <ToastContainer autoClose={3000} />
       <HomeContainer>
         <section className="sidebar-myUser-container">
-          <div className="sidebar-myUser-infos user-img">
-            <h3><FaUserCircle /></h3>
-          </div>
           <div className="sidebar-myUser-infos">
             <h3>{user.name}</h3>
           </div>
@@ -66,17 +77,18 @@ function Home() {
           <form className="form-container" onSubmit={handleSubmit}>
             <Input
               type="text"
-              name="title"
+              name="Title"
               placeHolder="Your type title"
               handleOnChange={handleChange}
-              value={post.title || ''}
+              value={post.Title || ''}
             />
             <div>
-              <textarea name="content" placeholder="Type your Post" onChange={handleChange} />
+              <textarea name="Content" placeholder="Type your Post" onChange={handleChange} />
             </div>
             <input type="submit" onClick={handleClick} value="Post" />
           </form>
         </section>
+        <h6>{posts}</h6>
       </HomeContainer>
     </>
   );
