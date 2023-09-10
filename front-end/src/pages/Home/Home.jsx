@@ -5,11 +5,12 @@ import api from '../../services/api';
 
 import { HomeContainer } from './styleHome';
 import Input from '../../components/input/input';
+import PostsComponents from '../../components/Posts/Posts';
 
 function Home() {
   const [user, setUser] = useState({});
   const [post, setPost] = useState({});
-  const [posts, setPosts] = useState({});
+  const [posts, setPosts] = useState([]);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
@@ -19,12 +20,12 @@ function Home() {
       },
     })
       .then((resp) => {
-        setPosts(resp.data.Posts);
+        setPosts(resp.data.Post);
       })
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, [token]);
 
   useEffect(() => {
     api.get('/user/profile', {
@@ -62,33 +63,43 @@ function Home() {
       <Header />
       <ToastContainer autoClose={3000} />
       <HomeContainer>
-        <section className="sidebar-myUser-container">
-          <div className="sidebar-myUser-infos">
-            <h3>{user.name}</h3>
-          </div>
-          <div className="sidebar-myUser-infos">
-            <h3>{user.email}</h3>
-          </div>
-          <div className="sidebar-myUser-infos">
-            <h3>{user.phone}</h3>
-          </div>
-        </section>
-        <section className="Post">
-          <form className="form-container" onSubmit={handleSubmit}>
-            <Input
-              type="text"
-              name="Title"
-              placeHolder="Your type title"
-              handleOnChange={handleChange}
-              value={post.Title || ''}
-            />
-            <div>
-              <textarea name="Content" placeholder="Type your Post" onChange={handleChange} />
+        <section className="home">
+          <section className="sidebar-myUser-container">
+            <div className="sidebar-myUser-infos">
+              <h3>{user.name}</h3>
             </div>
-            <input type="submit" onClick={handleClick} value="Post" />
-          </form>
+            <div className="sidebar-myUser-infos">
+              <h3>{user.email}</h3>
+            </div>
+            <div className="sidebar-myUser-infos">
+              <h3>{user.phone}</h3>
+            </div>
+          </section>
+          <section className="Post">
+            <form className="form-container" onSubmit={handleSubmit}>
+              <h1>Share your story</h1>
+              <Input
+                type="text"
+                name="Title"
+                placeHolder="Your type title"
+                handleOnChange={handleChange}
+                value={post.Title || ''}
+              />
+              <div>
+                <textarea name="Content" placeholder="Type your Post" onChange={handleChange} />
+              </div>
+              <input type="submit" onClick={handleClick} value="Post" />
+            </form>
+          </section>
         </section>
-        <h6>{posts}</h6>
+        {
+          posts && posts.map((postss) => (
+            <PostsComponents
+              Title={postss.Title}
+              Content={postss.Content}
+            />
+          ))
+        }
       </HomeContainer>
     </>
   );

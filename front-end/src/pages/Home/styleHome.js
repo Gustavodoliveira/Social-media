@@ -2,7 +2,9 @@ import { styled } from 'styled-components';
 import * as globalStyle from '../../globalStyle';
 
 export const HomeContainer = styled.div`
-    display: flex;
+    .home{
+      display: flex;
+    }
     
     .sidebar-myUser-container{
       background-color: ${globalStyle.colorBgSecondary};
@@ -32,6 +34,10 @@ export const HomeContainer = styled.div`
 
     .form-container{
       margin-top: 2rem;
+
+      & h1 {
+        font-size: 1.5rem;
+      }
     }
     
     input[type='submit']{
