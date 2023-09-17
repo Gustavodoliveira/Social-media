@@ -1,19 +1,37 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { FaDeleteLeft } from 'react-icons/fa6';
-import { AiFillEdit } from 'react-icons/ai';
+import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
+import { PostContainer, ReactIcons } from './styledPosts';
+import api from '../../services/api';
 
-import { PostContainer } from './styledPosts';
-import Input from '../input/input';
-
-function PostsComponents({ Title, Content, id }) {
+function PostsComponents({
+  Title, Content, key, id,
+}) {
+  const token = localStorage.getItem('token');
+  async function deletePost(idpost) {
+    await api.delete(`/post/delete/${idpost}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <PostContainer>
-      <section className="Posts-container" id={id}>
+      <section className="Posts-container" id={key}>
+        <input type="hidden" name="idpost" value={id} />
         <div className="Posts-saved">
           <h3>{Title}</h3>
           <p>{Content}</p>
-          <p>{id}</p>
+          <ReactIcons>
+            <AiFillDelete className="post-delete" onClick={deletePost(id)} />
+            <AiFillEdit className="post-edit" />
+          </ReactIcons>
         </div>
       </section>
     </PostContainer>
@@ -23,6 +41,7 @@ function PostsComponents({ Title, Content, id }) {
 PostsComponents.propTypes = {
   Title: PropTypes.string.isRequired,
   Content: PropTypes.string.isRequired,
+  key: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
 };
 

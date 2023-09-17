@@ -27,10 +27,32 @@ export const PostContainer = styled.div`
 
       h3{
         text-indent: .5rem;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
         margin-bottom: .8rem;
         border-bottom: 1px solid #f4f4f4;
       };
+
+      p{
+        text-align: start;
+        font-size: 1rem;
+      }
     }
 
+`;
+
+export const ReactIcons = styled.div`
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+    font-size: 1rem;
+
+    .post-delete{
+      color: red;
+      cursor: pointer;
+    }
+
+    .post-edit{
+      color: green;
+      cursor: pointer;
+    }
 `;

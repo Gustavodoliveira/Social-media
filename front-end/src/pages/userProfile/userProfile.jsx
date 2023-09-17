@@ -37,7 +37,6 @@ function UserProfile() {
     })
       .then((resp) => {
         setmyPost(resp.data.post);
-        console.log(resp);
       });
   }, [token]);
   function handleChange(e) {
@@ -121,10 +120,12 @@ function UserProfile() {
         <section className="My-posts">
           {
             myPost && myPost.map((postss) => (
+
               <PostsComponents
                 Title={postss.Title}
                 Content={postss.Content}
                 key={postss._id}
+                id={postss._id}
               />
             ))
           }
