@@ -41,6 +41,8 @@ export const HomeContainer = styled.div`
       font-size: 1rem;      
     }
 
-    
+    .Post--postad{
+      margin-top: 13rem;
+    }
 
 `;

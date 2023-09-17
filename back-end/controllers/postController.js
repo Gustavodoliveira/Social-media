@@ -17,7 +17,7 @@ module.exports = class postController {
     try {
       const post = await Posts.findById(decoded.id).select('-createdAt -updateAt -_id');
 
-      res.status(200).json({ message: post });
+      res.status(200).json({ post });
     } catch (error) {
       res.status(500).json({ message: 'Error in server' });
     }

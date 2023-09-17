@@ -14,6 +14,7 @@ import { ProfileContainer } from './styleUserProfile';
 function UserProfile() {
   const { Userdelete } = useContext(Context);
   const [user, setUser] = useState({});
+  const [Post, setPost] = useState([]);
   const [token] = useState(localStorage.getItem('token') || '');
   const Navigate = useNavigate();
 
@@ -27,6 +28,16 @@ function UserProfile() {
     });
   }, [token]);
 
+  useEffect(() => {
+    api.get('/post/mypost', {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    })
+      .then((resp) => {
+        setPost(resp.data.post);
+      });
+  }, [token]);
   function handleChange(e) {
     setUser({ ...user, [e.target.name]: e.target.value });
   }
@@ -105,7 +116,10 @@ function UserProfile() {
             <span><AiOutlineUserDelete onClick={DeleteUser} /></span>
           </h3>
         </form>
-
+        {/* TO DO
+          1. fazer edit e delete do post
+          2. concluir o projeto,
+         */}
       </ProfileContainer>
     </>
   );

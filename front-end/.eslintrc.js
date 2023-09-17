@@ -32,6 +32,7 @@ module.exports = {
     'react/jsx-no-bind': 'off',
     'default-param-last': 0,
     'no-unused-vars': 'off',
-    ' import/no-named-as-default-member': 0,
+    'import/no-named-as-default-member': 0,
+    'no-underscore-dangle': 0,
   },
 };

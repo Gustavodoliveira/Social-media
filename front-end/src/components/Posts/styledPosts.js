@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import * as globalStyled from '../../globalStyle';
 
 export const PostContainer = styled.div`
-    .Posts-saved {
-      margin: 1rem auto 2rem auto;
+    .Posts-container{
+      margin: 2rem auto 2rem auto;
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
   }
 
-    .Posts-container{
+    .Posts-saved{
       padding: 1rem;
       width: 30rem;
       background-color: ${globalStyled.textColorPrimary};
@@ -31,4 +32,5 @@ export const PostContainer = styled.div`
         border-bottom: 1px solid #f4f4f4;
       };
     }
+
 `;
