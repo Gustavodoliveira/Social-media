@@ -14,10 +14,9 @@ const Posts = mongoose.model(
         type: String,
         required: true,
       },
-      user: {
-        _id: String,
-        name: String,
-        email: String,
+      userId: {
+        type: String,
+        required: true,
       },
     },
     { timestamps: true },

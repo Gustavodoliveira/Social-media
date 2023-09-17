@@ -10,11 +10,12 @@ import { Context } from '../../context/UserContext';
 import Header from '../../components/header/header';
 import Input from '../../components/input/input';
 import { ProfileContainer } from './styleUserProfile';
+import PostsComponents from '../../components/Posts/Posts';
 
 function UserProfile() {
   const { Userdelete } = useContext(Context);
   const [user, setUser] = useState({});
-  const [Post, setPost] = useState([]);
+  const [myPost, setmyPost] = useState([]);
   const [token] = useState(localStorage.getItem('token') || '');
   const Navigate = useNavigate();
 
@@ -35,7 +36,8 @@ function UserProfile() {
       },
     })
       .then((resp) => {
-        setPost(resp.data.post);
+        setmyPost(resp.data.post);
+        console.log(resp);
       });
   }, [token]);
   function handleChange(e) {
@@ -116,10 +118,17 @@ function UserProfile() {
             <span><AiOutlineUserDelete onClick={DeleteUser} /></span>
           </h3>
         </form>
-        {/* TO DO
-          1. fazer edit e delete do post
-          2. concluir o projeto,
-         */}
+        <section className="My-posts">
+          {
+            myPost && myPost.map((postss) => (
+              <PostsComponents
+                Title={postss.Title}
+                Content={postss.Content}
+                key={postss._id}
+              />
+            ))
+          }
+        </section>
       </ProfileContainer>
     </>
   );

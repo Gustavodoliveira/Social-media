@@ -9,11 +9,11 @@ import Input from '../input/input';
 function PostsComponents({ Title, Content, id }) {
   return (
     <PostContainer>
-      <section className="Posts-container">
+      <section className="Posts-container" id={id}>
         <div className="Posts-saved">
-          <input type="text" value={id} />
           <h3>{Title}</h3>
           <p>{Content}</p>
+          <p>{id}</p>
         </div>
       </section>
     </PostContainer>

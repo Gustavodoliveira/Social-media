@@ -15,7 +15,7 @@ module.exports = class postController {
     const token = getToken(req);
     const decoded = jwt.verify(token, process.env.SECRET);
     try {
-      const post = await Posts.findById(decoded.id).select('-createdAt -updateAt -_id');
+      const post = await Posts.find({ userId: decoded.id }).select('-createdAt -updateAt');
 
       res.status(200).json({ post });
     } catch (error) {
@@ -26,19 +26,17 @@ module.exports = class postController {
   static async Postar(req, res) {
     const token = getToken(req);
     const decoded = jwt.verify(token, process.env.SECRET);
-    const Userid = decoded.id;
+    const userId = decoded.id;
     const { Title, Content } = req.body;
 
     if (!Title) return res.status(422).json({ message: 'The title is required' });
     if (!Content) return res.status(422).json({ message: 'The content is required' });
 
     try {
-      const user = await User.findById(Userid);
-
       const post = new Posts({
         Title,
         Content,
-        user,
+        userId,
       });
 
       await post.save();
