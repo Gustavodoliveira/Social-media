@@ -55,7 +55,7 @@ module.exports = class postController {
 
     if (!post) return res.status(400).json({ message: 'Post not exists' });
 
-    if (decoded.id !== post.user._id) return res.status(401).json({ message: 'Not authorization' });
+    if (decoded.id !== post.userId) return res.status(401).json({ message: 'Not authorization' });
     const { Title, Content } = req.body;
 
     if (!Title) return res.status(400).json({ message: 'The title is required' });
@@ -86,13 +86,13 @@ module.exports = class postController {
 
     if (!post) return res.status(400).json({ message: 'Post not exists' });
 
-    if (decoded.id !== post.user._id) return res.status(401).json({ message: 'Not authorization' });
+    if (decoded.id !== post.userId) return res.status(401).json({ message: 'Not authorization' });
 
     try {
       await Posts.deleteOne({ _id: post._id });
       res.status(200).json({ message: 'Post success delete' });
     } catch (error) {
-      res.status(500).json({ message: 'Server in error' });
+      res.status(401).json({ message: 'Unhantorized' });
     }
   }
 };
