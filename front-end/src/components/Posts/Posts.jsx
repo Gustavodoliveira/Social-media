@@ -20,13 +20,10 @@ function PostsComponents({
     })
       .then((res) => {
         toast.success(`${res.data.message}`);
-        setInterval(() => {
-          Navigate('/home');
-        }, 4000);
+        Navigate('/home');
       })
       .catch((err) => {
         toast.error(`${err.response.data.message}`);
-        /* Corrigir reading 'data' */
       });
   }
 

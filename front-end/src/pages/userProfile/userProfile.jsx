@@ -44,8 +44,6 @@ function UserProfile() {
   }
 
   async function handleClick(e) {
-    e.preventDefault();
-
     await api.patch(`/user/edit/${user._id}`, (user), {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
