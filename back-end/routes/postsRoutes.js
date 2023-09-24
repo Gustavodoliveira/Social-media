@@ -6,6 +6,7 @@ const router = Router();
 
 router.get('/', checkToken, postController.ShowPost);
 router.get('/mypost', checkToken, postController.myPost);
+router.get('/getpost/:id', checkToken, postController.getPostEdit);
 router.post('/postar', checkToken, postController.Postar);
 router.patch('/edit/:id', checkToken, postController.EditPost);
 router.delete('/delete/:id', checkToken, postController.DeletePost);

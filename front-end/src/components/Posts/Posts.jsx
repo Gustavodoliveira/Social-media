@@ -1,18 +1,19 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { PostContainer, ReactIcons } from './styledPosts';
 import api from '../../services/api';
 
 function PostsComponents({
-  Title, Content, key,
+  Title, Content, key, id,
 }) {
   const Navigate = useNavigate();
+
   const token = localStorage.getItem('token');
   async function deletePost() {
-    await api.delete(`/post/delete/${key}`, {
+    await api.delete(`/post/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${JSON.parse(token)}`,
       },
@@ -28,6 +29,7 @@ function PostsComponents({
         /* Corrigir reading 'data' */
       });
   }
+
   return (
     <PostContainer>
       <section className="Posts-container" id={key}>
@@ -36,7 +38,7 @@ function PostsComponents({
           <p>{Content}</p>
           <ReactIcons>
             <AiFillDelete className="post-delete" onClick={deletePost} />
-            <AiFillEdit className="post-edit" />
+            <Link to={`/editPost/${id}`}><AiFillEdit className="post-edit" /></Link>
           </ReactIcons>
         </div>
       </section>
@@ -48,6 +50,7 @@ PostsComponents.propTypes = {
   Title: PropTypes.string.isRequired,
   Content: PropTypes.string.isRequired,
   key: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default PostsComponents;

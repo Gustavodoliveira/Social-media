@@ -86,6 +86,7 @@ function Home() {
                 Title={postss.Title}
                 Content={postss.Content}
                 key={postss._id}
+                id={postss._id}
               />
             ))
           }

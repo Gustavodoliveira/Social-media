@@ -9,6 +9,7 @@ import Footer from './components/footer/Footer';
 
 import { GlobalBodyStyled } from './globalStyle';
 import UserProfile from './pages/userProfile/userProfile';
+import EditPost from './pages/EditPost/EditPost';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/editProfile/:id" element={<UserProfile />} />
+            <Route path="/editPost/:id" element={<EditPost />} />
           </Routes>
           <Footer />
         </GlobalBodyStyled>

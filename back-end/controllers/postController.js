@@ -1,8 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import getToken from '../middleware/get-Token';
 import Posts from '../models/Post';
-import User from '../models/User';
 
 module.exports = class postController {
   static async ShowPost(req, res) {
@@ -86,7 +86,7 @@ module.exports = class postController {
 
     if (!post) return res.status(400).json({ message: 'Post not exists' });
 
-    if (decoded.id !== post.userId) return res.status(401).json({ message: 'Not authorization' });
+    if (decoded.id !== post.userId) return res.status(400).json({ message: 'Not authorization' });
 
     try {
       await Posts.deleteOne({ _id: post._id });
@@ -94,5 +94,19 @@ module.exports = class postController {
     } catch (error) {
       res.status(401).json({ message: 'Unhantorized' });
     }
+  }
+
+  static async getPostEdit(req, res) {
+    const { id } = req.params;
+    const token = getToken(req);
+    const decoded = jwt.verify(token, process.env.SECRET);
+
+    const post = await Posts.findById(id);
+
+    if (!post) return res.status(400).json({ message: 'Not exists post' });
+
+    if (decoded.id !== post.userId) return res.status(401).json({ message: 'You not authorization' });
+
+    return res.status(200).json({ message: post });
   }
 };
